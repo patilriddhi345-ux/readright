@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Resources & Links – Read Right</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+*{ box-sizing:border-box; }
+html,body{height:100%;}
+
+/* ===== BODY & BACKGROUND ===== */
+body{
+    margin:0;
+    font-family:"Segoe UI",Arial,sans-serif;
+    overflow-x:hidden;
+    opacity:0;
+    transition:opacity .9s ease;;
+    display:flex;
+    flex-direction:column;
+}
+body.loaded{opacity:1;}
+
+.bg-anim{
+    position:fixed;
+    inset:0;
+    background:url("https://images.unsplash.com/photo-1507842217343-583bb7270b66") center/cover no-repeat;
+    z-index:-2;
+    animation:bgMove 20s linear infinite;
+}
+@keyframes bgMove{
+    0%{background-position:center top;}
+    100%{background-position:center bottom;}
+}
+
+.bg-overlay{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(rgba(227,242,253,.8), rgba(95,111,128,.8));
+    z-index:-1;
+}
+
+/* ===== HEADER ===== */
+header{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    color:white;
+    text-align:center;
+    padding:22px 15px 30px;
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+h1{
+    font-family:'Cinzel',serif;
+    font-size:38px;
+    background:linear-gradient(90deg,#b6a3bb,#919633,#37d39f,#1976d2);
+    background-size:300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:titleFlow 6s linear infinite;
+}
+@keyframes titleFlow{
+    0%{background-position:0%}
+    100%{background-position:300%}
+}
+
+.back-home{
+    color:#ffe082;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* ===== MAIN ===== */
+main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* ===== SUBMENU ===== */
+.submenu{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:30px auto;
+    max-width:900px;
+}
+
+.submenu button{
+    border:none;
+    padding:14px 28px;
+    border-radius:30px;
+    background:white;
+    color:#0d47a1;
+    font-weight:bold;
+    cursor:pointer;
+     transition:
+        transform .45s cubic-bezier(.22,.61,.36,1),
+        background .45s ease,
+        box-shadow .45s ease,
+        color .45s ease;
+}
+.submenu button:hover{
+    background:#ffeb3b;
+    transform:translateY(-5px);
+}
+.submenu button.active{
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+    color:white;
+    box-shadow:0 12px 28px rgba(13,71,161,.35);
+}
+
+/* ===== SECTION BASE ===== */
+.section{
+    display:none;
+    position:relative;
+    padding:40px;
+    border-radius:22px;
+    max-width:900px;
+    width:90%;
+    margin-bottom:40px;
+    overflow:hidden;
+    box-shadow:0 40px 80px rgba(0,0,0,.35);
+    color:#0d47a1;
+}
+
+/* BACKGROUND IMAGE LAYER */
+.section::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    z-index:0;
+}
+
+/* WHITE OVERLAY */
+.section::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,.88);
+    z-index:1;
+}
+
+/* CONTENT ABOVE BG */
+.section > *{
+    position:relative;
+    z-index:2;
+}
+
+/* DIFFERENT BG FOR EACH SECTION */
+#gov::before{
+    background-image:url("https://images.unsplash.com/photo-1529070538774-1843cb3265df");
+}
+#help::before{
+    background-image:url("https://images.unsplash.com/photo-1521791136064-7986c2920216");
+}
+#learn::before{
+    background-image:url("https://images.unsplash.com/photo-1513258496099-48168024aec0");
+}
+.section,
+.section *{
+    will-change: transform, opacity;
+}
+/* POP ANIMATION */
+.section.pop{
+    animation:popFromTop 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes popFromTop{
+    0%{
+        transform:translateY(-12px) scale(.98);
+        opacity:0;
+    }
+    100%{
+        transform:translateY(0) scale(1);
+        opacity:1;
+    }
+}
+
+h2{color:#0d47a1;}
+
+ul{padding-left:0;}
+ul li{
+    list-style:none;
+    margin:12px 0;
+}
+ul li i{
+    color:#1565c0;
+    margin-right:10px;
+}
+
+a.resource{
+    color:#0d47a1;
+    font-weight:bold;
+    text-decoration:none;
+}
+a.resource:hover{ text-decoration:underline; }
+.section h2{
+    opacity:0;
+    transform:translateY(-8px);
+    animation:headingReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes headingReveal{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* List item animation */
+.section ul li{
+    opacity:0;
+    transform:translateX(-10px);
+    animation:liReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+/* stagger delay */
+.section ul li:nth-child(1){ animation-delay:.15s; }
+.section ul li:nth-child(2){ animation-delay:.30s; }
+.section ul li:nth-child(3){ animation-delay:.45s; }
+.section ul li:nth-child(4){ animation-delay:.60s; }
+.section ul li:nth-child(5){ animation-delay:.75s; }
+
+@keyframes liReveal{
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+/* Icon pulse on hover */
+.section ul li i{
+    transition:transform .45s cubic-bezier(0.16,1,0.3,1),
+               color .35s ease;
+}
+.section ul li:hover i{
+    transform:scale(1.3) rotate(-8deg);
+    color:#ff9800;
+}
+
+/* Link underline slide */
+a.resource{
+    position:relative;
+}
+a.resource::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-4px;
+    width:0;
+    height:2px;
+    background:#1976d2;
+    transition:.4s;
+}
+a.resource:hover::after{
+    width:100%;
+}
+@media (prefers-reduced-motion: reduce){
+    *{
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/* ===== FOOTER ===== */
+footer{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    color:#e3f2fd;
+    text-align:center;
+    padding:14px 10px;
+    font-size:.9rem;
+}
+</style>
+</head>
+
+<body onload="document.body.classList.add('loaded'); showSection('gov',document.querySelector('.submenu button'))">
+
+<div class="bg-anim"></div>
+<div class="bg-overlay"></div>
+
+<header>
+    <h1><i class="fa-solid fa-link"></i> Resources & Links</h1>
+    <a href="index.html" class="back-home">← Back to Home</a>
+</header>
+
+<main>
+
+<div class="submenu">
+    <button class="active" onclick="showSection('gov',this)">
+        <i class="fa-solid fa-landmark"></i> Government Portals
+    </button>
+    <button onclick="showSection('help',this)">
+        <i class="fa-solid fa-headset"></i> Helplines
+    </button>
+    <button onclick="showSection('learn',this)">
+        <i class="fa-solid fa-graduation-cap"></i> Learning Resources
+    </button>
+</div>
+
+<div id="gov" class="section">
+<h2>Government Portals</h2>
+<ul>
+<li><i class="fa-solid fa-check-circle"></i>
+<a class="resource" href="https://www.india.gov.in" target="_blank">National Portal of India</a></li>
+<li><i class="fa-solid fa-check-circle"></i>
+<a class="resource" href="https://diksha.gov.in" target="_blank">DIKSHA – Digital Learning</a></li>
+<li><i class="fa-solid fa-check-circle"></i>
+<a class="resource" href="https://ndl.iitkgp.ac.in" target="_blank">National Digital Library</a></li>
+<li><i class="fa-solid fa-check-circle"></i>
+<a class="resource" href="https://www.ugc.ac.in" target="_blank">UGC Official Website</a></li>
+</ul>
+</div>
+
+<div id="help" class="section">
+<h2>Helplines</h2>
+<ul>
+<li><i class="fa-solid fa-phone"></i> Student Helpline – <strong>1800-599-0019</strong></li>
+<li><i class="fa-solid fa-phone"></i> Mental Health – <strong>Tele MANAS: 14416</strong></li>
+<li><i class="fa-solid fa-phone"></i> Cyber Safety – <strong>1930</strong></li>
+</ul>
+</div>
+
+<div id="learn" class="section">
+<h2>Learning Resources</h2>
+<ul>
+<li><i class="fa-solid fa-book"></i>
+<a class="resource" href="https://swayam.gov.in" target="_blank">SWAYAM Online Courses</a></li>
+<li><i class="fa-solid fa-book"></i>
+<a class="resource" href="https://www.khanacademy.org" target="_blank">Khan Academy</a></li>
+<li><i class="fa-solid fa-book"></i>
+<a class="resource" href="https://www.coursera.org" target="_blank">Coursera</a></li>
+<li><i class="fa-solid fa-book"></i>
+<a class="resource" href="https://www.edx.org" target="_blank">edX</a></li>
+</ul>
+</div>
+
+</main>
+
+<footer>
+© 2026 Read Right | Student Awareness Project
+</footer>
+
+<script>
+function showSection(id,btn){
+    document.querySelectorAll('.section').forEach(sec=>{
+        sec.style.display='none';
+        sec.classList.remove('pop');
+    });
+
+    const active=document.getElementById(id);
+    active.style.display='block';
+
+    /* reset animations */
+    active.querySelectorAll('h2, li').forEach(el=>{
+        el.style.animation='none';
+        el.offsetHeight; // reflow
+        el.style.animation='';
+    });
+
+    setTimeout(()=>active.classList.add('pop'),10);
+
+    document.querySelectorAll('.submenu button')
+        .forEach(b=>b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

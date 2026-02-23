@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Research Findings – Read Right</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{ box-sizing:border-box; }
+body{
+    margin:0;
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:
+      linear-gradient(rgba(227,242,253,0.8),rgba(95,111,128,0.8)),
+      url("https://images.unsplash.com/photo-1507842217343-583bb7270b66");
+    background-size:cover;
+    background-attachment:fixed;
+    background-position:0% 0%;
+    animation:bgMove 18s ease-in-out infinite;
+    opacity:0;
+    transition:opacity .6s ease;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+body.loaded{opacity:1;}
+body, html { height: 100%; }
+main { flex: 1 0 auto; }
+footer { flex-shrink: 0; }
+
+@keyframes bgMove{
+    0%{background-position:0% 0%;}
+    50%{background-position:50% 50%;}
+    100%{background-position:100% 100%;}
+}
+/* ================= HEADER ================= */
+header{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    color:white;
+    text-align:center;
+    padding:22px 15px 30px;
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+h1{
+    font-family:'Cinzel', serif;
+    font-size:38px;
+    background:linear-gradient(
+        90deg,
+        #b6a3bb,
+        #919633,
+        #37d39f,
+        #1976d2
+    );
+    background-size:300% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:mainHeadingShift 6s linear infinite;
+    transition:.4s;
+}
+@keyframes mainHeadingShift{
+    0%{background-position:0%;}
+    100%{background-position:300%;}
+}
+
+h1:hover{
+    transform:translateY(-8px) rotateX(3deg) scale(1.03);
+    text-shadow:0 14px 40px rgba(0,150,136,0.18), 0 0 44px rgba(255,111,97,0.12);
+}
+
+.back-home{
+    display:inline-block;
+    margin-top:6px;
+    color:#ffeb3b;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+.back-home:hover{ transform:translateX(-6px); }
+
+@media(max-width:600px){
+    h1{font-size:30px;}
+}
+
+/* ================= SUBMENU ================= */
+.submenu{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin:30px auto;
+    flex-wrap:wrap;
+    perspective:1200px;
+    max-width:800px;   
+    width:90%;       
+}
+
+.submenu button{
+    border:none;
+    padding:14px 28px;
+    border-radius:30px;
+    background:white;
+    color:#0d47a1;
+    font-weight:bold;
+    cursor:pointer;
+    transition:all .45s cubic-bezier(.22,.61,.36,1);
+}
+
+.submenu button:hover{
+    transform:translateY(-5px);
+    background:#ffeb3b;
+}
+
+.submenu button.active{
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+    color:white;
+    box-shadow:0 12px 28px rgba(13,71,161,.35);
+}
+
+/* ================= SECTIONS ================= */
+.section{
+    display:none;
+    padding:40px;
+    border-radius:20px;
+    background-size:cover;
+    background-position:center;
+     max-width: 900px;   
+    width: 90%;         
+    margin: 0 auto;     
+    box-shadow:0 35px 60px rgba(0,0,0,.35);
+}
+
+.section.pop{
+    animation:popFromTop 1s cubic-bezier(.22,.61,.36,1);
+}
+
+@keyframes popFromTop{
+    0%{transform:translateY(-40px) scale(.96);opacity:0;}
+    100%{transform:translateY(0) scale(1);opacity:1;}
+}
+
+.section:hover{
+    transform:translateY(-6px);
+    transition:.4s ease;
+    box-shadow:0 40px 80px rgba(0,0,0,.25);
+}
+
+/* SECTION BACKGROUNDS */
+#summary {
+    background: 
+        linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+        url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+    background-size: cover;
+    background-position: center;
+    border-radius:20px;
+    padding:40px;
+}
+
+#charts {
+    background: 
+        linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+        url("https://images.unsplash.com/photo-1551288049-bebda4e38f71");
+    background-size: cover;
+    background-position: center;
+    border-radius:20px;
+    padding:40px;
+}
+
+#insights {
+    background: 
+        linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+        url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d");
+    background-size: cover;
+    background-position: center;
+    border-radius:20px;
+    padding:40px;
+}
+
+#download {
+    background: 
+        linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+        url("https://images.unsplash.com/photo-1581091012184-65fcf37a0f18");
+    background-size: cover;
+    background-position: center;
+    border-radius:20px;
+    padding:40px;
+}
+
+h2{ color:#0d47a1; }
+
+/* IMAGES */
+img{
+    width:100%;
+    max-width:520px;
+    display:block;
+    margin:20px auto;
+    border-radius:14px;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+    transition:.6s ease;
+}
+img:hover{
+    transform:scale(1.05);
+}
+
+/* LIST */
+ul{ padding-left:0; }
+ul li{
+    list-style:none;
+    margin:12px 0;
+}
+ul li i{
+    color:#1565c0;
+    margin-right:10px;
+}
+.animated-list li{
+    opacity:0;
+    transform:translateY(18px);
+    animation:fadeUp .7s ease forwards;
+}
+
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+/* DOWNLOAD BUTTON */
+.download a{
+    background:linear-gradient(90deg,#0d47a1,#42a5f5);
+    color:white;
+    padding:15px 35px;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+    display:inline-block;
+    transition:.4s ease;
+}
+.download a:hover{
+    background:#ffeb3b;
+    color:black;
+    transform:translateY(-5px);
+}
+.glass-chart{
+    background:rgba(15, 23, 42, 0.65); 
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius:22px;
+    padding:32px;
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.6),
+        inset 0 0 0 1px rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+}
+.chart-questions{
+    margin-top:22px;
+    font-size:15px;
+    line-height:1.9;
+    color:#e0e7ff;         
+    font-weight:500;
+}
+
+.chart-questions b{
+    color:#ffffff;          
+    font-size:16px;
+}
+
+.chart-questions span{
+    display:block;
+    margin-bottom:6px;
+    color:#a5b4fc;          
+}
+
+/* === FOOTER (BOTTOM FIXED) === */
+footer{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    color:#e3f2fd;
+    text-align:center;
+    padding:14px 10px;
+    font-size:.9rem;
+    box-shadow:0 -6px 18px rgba(0,0,0,.35);
+}
+
+@media(max-width:600px){
+    .footer-content{
+        flex-direction:column;
+        text-align:center;
+    }
+    .footer-left p{
+        margin:auto;
+    }
+}
+</style>
+</head>
+
+<body onload="
+document.body.classList.add('loaded');
+showSection('summary', document.querySelector('.submenu button'));
+initChart();
+">
+
+<header>
+    <h1><i class="fa-solid fa-microscope"></i> Research Findings</h1>
+    <a href="index.html" class="back-home">← Back to Home</a>
+</header>
+
+<main>
+<div class="submenu">
+    <button class="active" onclick="showSection('summary',this)">
+        <i class="fa-solid fa-file-lines"></i> Summary
+    </button>
+    <button onclick="showSection('charts',this)">
+        <i class="fa-solid fa-chart-column"></i> Charts & Graphs
+    </button>
+    <button onclick="showSection('insights',this)">
+        <i class="fa-solid fa-lightbulb"></i> Key Insights
+    </button>
+    <button onclick="showSection('download',this)">
+        <i class="fa-solid fa-download"></i> Download
+    </button>
+</div>
+
+<div id="summary" class="section">
+    <h2><i class="fa-solid fa-file-lines"></i> Summary</h2>
+
+    <ul class="animated-list">
+        <li>
+            <i class="fa-solid fa-check-circle"></i>
+            The study explores college students’ preferences for e-books and printed books in academic learning.
+        </li>
+        <li>
+            <i class="fa-solid fa-check-circle"></i>
+            A mixed-method approach was used, including surveys, interviews, and observations of 44 students.
+        </li>
+        <li>
+            <i class="fa-solid fa-check-circle"></i>
+            Most students read regularly and use both e-books and printed books for study purposes.
+        </li>
+        <li>
+            <i class="fa-solid fa-check-circle"></i>
+            E-books are preferred for accessibility, portability, quick search features, and cost-effectiveness.
+        </li>
+        <li>
+            <i class="fa-solid fa-check-circle"></i>
+            Printed books support better reading comfort, familiarity, and concentration.
+        </li>
+        <li>
+            <i class="fa-solid fa-check-circle"></i>
+            The findings suggest a shift toward digital learning, with a hybrid approach being the most effective.
+        </li>
+    </ul>
+</div>
+<div id="charts" class="section">
+    <h2><i class="fa-solid fa-chart-column"></i> Charts & Graphs</h2>
+
+    <div class="glass-chart">
+        <canvas id="readChart" height="140"></canvas>
+
+        <div class="chart-questions">
+    <b>Survey Questions:</b><br><br>
+
+    <span>1. How often do you read books for academic purposes?</span>
+    <span>2. Which format do you prefer for academic reading?</span>
+    <span>3. Weekly time spent on e-books</span>
+    <span>4. Weekly time spent on printed books</span>
+    <span>5. Preferred format while accessing books</span>
+    <span>6. Reason behind format preference</span>
+    <span>7. Challenges with the less-preferred format</span>
+    <span>8. Will e-books replace printed books?</span>
+    <span>9. Library resource preference</span>
+    <span>10. One-format choice for studies</span>
+</div>
+    </div>
+</div>
+
+<div id="insights" class="section">
+    <h2><i class="fa-solid fa-lightbulb"></i> Key Insights</h2>
+    <ul class="animated-list">
+        <li><i class="fa-solid fa-check-circle"></i> Students read academic books daily or several times a week.</li>
+        <li><i class="fa-solid fa-check-circle"></i> Weekly reading time ranges from less than one hour to over three hours.</li>
+        <li><i class="fa-solid fa-check-circle"></i> E-books are preferred for accessibility, availability, and convenience.</li>
+        <li><i class="fa-solid fa-check-circle"></i> Printed books support better focus but are heavy and costly.</li>
+        <li><i class="fa-solid fa-check-circle"></i> E-books may cause eye strain and digital distractions.</li>
+        <li><i class="fa-solid fa-check-circle"></i> A balanced mix of e-books and printed books is recommended for libraries.</li>
+    </ul>
+</div>
+<div id="download" class="section">
+    <h2><i class="fa-solid fa-file-pdf"></i> Full Research Paper</h2>
+
+    <iframe 
+        src="research-paper.pdf"
+        width="100%"
+        height="600px"
+        style="border:none; border-radius:16px; box-shadow:0 15px 35px rgba(0,0,0,.25);">
+    </iframe>
+
+    <div class="download" style="margin-top:25px; text-align:center;">
+        <a href="research-paper.pdf" download>
+            <i class="fa-solid fa-download"></i> Download PDF
+        </a>
+    </div>
+</div>
+</main>
+
+<footer>
+    © 2026 Read Right | Student Awareness Project
+</footer>
+
+<script>
+function showSection(id, btn){
+    document.querySelectorAll('.section').forEach(sec=>{
+        sec.style.display='none';
+        sec.classList.remove('pop');
+    });
+
+    const target = document.getElementById(id);
+    target.style.display = 'block';
+    target.classList.add('pop');
+
+    document.querySelectorAll('.submenu button')
+        .forEach(b=>b.classList.remove('active'));
+
+    if(btn) btn.classList.add('active');
+      const items = document.querySelectorAll(`#${id} .animated-list li`);
+    items.forEach((item, index)=>{
+        item.style.animationDelay = `${index * 0.15}s`;
+    });
+
+    window.scrollTo({ top:0, behavior:'smooth' });
+}
+  const insights = [
+  "Students read academic books regularly",
+  "E-books are preferred over printed books",
+  "1–3 hours weekly spent on e-books",
+  "Printed books used slightly less",
+  "E-books are accessed first",
+  "Convenience drives preference",
+  "Eye strain & distractions are challenges",
+  "Students expect digital dominance",
+  "Libraries should focus on digital resources",
+  "E-books chosen as single study format"
+];
+let readChart;
+
+function initChart(){
+    const ctx = document.getElementById("readChart");
+    if(!ctx) return;
+
+    readChart = new Chart(ctx,{
+        type:"bar",
+        data:{
+            labels:["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10"],
+            datasets:[{
+                data:[38,57,50,43,67,39,29,45,61,55],
+                backgroundColor:[
+                    "rgba(96,165,250,.9)",
+                    "rgba(52,211,153,.9)",
+                    "rgba(129,140,248,.9)",
+                    "rgba(244,114,182,.9)",
+                    "rgba(34,211,238,.9)",
+                    "rgba(167,139,250,.9)",
+                    "rgba(251,191,36,.9)",
+                    "rgba(232,121,249,.9)",
+                    "rgba(14,165,233,.9)",
+                    "rgba(139,92,246,.9)"
+                ],
+                borderRadius:14,
+                borderColor:"rgba(255,255,255,.25)",
+                borderWidth:1
+            }]
+        },
+        options:{
+            plugins:{
+                legend:{display:false},
+                tooltip:{
+                    backgroundColor:"rgba(15,23,42,.95)",
+                    titleColor:"#fff",
+                    bodyColor:"#e0e7ff",
+                    callbacks:{
+                        title:()=> "Survey Insight",
+                        label:(ctx)=> `${insights[ctx.dataIndex]} (${ctx.raw}%)`
+                    }
+                }
+            },
+            scales:{
+                x:{ ticks:{ color:"#c7d2fe" }, grid:{display:false} },
+                y:{ ticks:{ color:"#c7d2fe" }, grid:{color:"rgba(148,163,184,.15)"} }
+            }
+        }
+    });
+}
+</script>
+
+</body>
+</html>

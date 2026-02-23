@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Survey & Poll – Read Right</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+*{ box-sizing:border-box; }
+body{
+    margin:0;
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:
+      linear-gradient(rgba(227,242,253,0.8),rgba(95,111,128,0.8)),
+      url("https://images.unsplash.com/photo-1507842217343-583bb7270b66");
+    background-size:cover;
+    background-attachment:fixed;
+    animation:bgMove 18s ease-in-out infinite;
+    opacity:0;
+    transition:.6s;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+body.loaded{opacity:1;}
+
+@keyframes bgMove{
+    0%{background-position:0% 0%;}
+    50%{background-position:50% 50%;}
+    100%{background-position:100% 100%;}
+}
+
+main{flex:1;}
+
+/* ================= HEADER ================= */
+header{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    color:white;
+    text-align:center;
+    padding:22px 15px 30px;
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+h1{
+    font-family:'Cinzel', serif;
+    font-size:38px;
+    background:linear-gradient(90deg,#b6a3bb,#919633,#37d39f,#1976d2);
+    background-size:300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:titleFlow 6s linear infinite;
+}
+@keyframes titleFlow{
+    0%{background-position:0%}
+    100%{background-position:300%}
+}
+.back-home{
+    display:inline-block;
+    margin-top:6px;
+    color:#ffeb3b;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* ================= SUBMENU ================= */
+.submenu{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin:30px auto;
+    flex-wrap:wrap;
+    max-width:600px;
+    width:90%;
+}
+.submenu button{
+    border:none;
+    padding:14px 32px;
+    border-radius:30px;
+    background:white;
+    color:#0d47a1;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.4s;
+}
+.submenu button:hover{
+    transform:translateY(-5px);
+    background:#ffeb3b;
+}
+.submenu button.active{
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+    color:white;
+    box-shadow:0 12px 28px rgba(13,71,161,.35);
+}
+
+/* ================= SECTIONS ================= */
+.section{
+    display:none;
+    padding:26px 28px;   
+    border-radius:18px;
+    background:rgba(255,255,255,.92);
+
+    max-width:760px;    
+    width:88%;
+    margin:0 auto 35px;
+
+    box-shadow:0 22px 45px rgba(0,0,0,.28);
+}
+#form.section{
+    max-width:700px;
+}
+.section.pop{
+    animation:popFromTop .9s cubic-bezier(.22,.61,.36,1);
+}
+/* ================= QUICK POLL BACKGROUND ================= */
+#poll{
+    background:
+      linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.9)),
+      url("https://images.unsplash.com/photo-1512820790803-83ca734da794");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+@keyframes popFromTop{
+    0%{transform:translateY(-40px) scale(.96);opacity:0;}
+    100%{transform:translateY(0) scale(1);opacity:1;}
+}
+
+h2{color:#0d47a1;}
+
+/* ================= QUICK POLL (NEW) ================= */
+.poll-card{
+    background:#ffffff;
+    padding:20px;
+    margin-bottom:22px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    animation:slideUp .8s ease;
+}
+
+@keyframes slideUp{
+    from{opacity:0; transform:translateY(25px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.poll-card p{
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.poll-options button{
+    margin:6px;
+    padding:10px 22px;
+    border:none;
+    border-radius:25px;
+    background:#1976d2;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+.poll-options button:hover{
+    background:#0d47a1;
+    transform:scale(1.07);
+}
+
+.poll-result{
+    margin-top:10px;
+    font-size:0.9rem;
+    font-weight:bold;
+}
+.summary-btn{
+    display:block;
+    margin:35px auto 0;
+    padding:14px 38px;
+    border:none;
+    border-radius:35px;
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    animation:pulse 1.6s infinite;
+}
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+    100%{transform:scale(1);}
+}
+/* ===== Question Appear Animation ===== */
+.poll-box{
+    background:rgba(255,255,255,0.96);
+    border-radius:18px;
+    padding:12px 16px;
+    margin-bottom:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.18);
+    border-left:6px solid #1976d2;
+    transition:transform .35s ease, box-shadow .35s ease;
+    opacity:0;
+    transform:translateY(35px) scale(0.97);
+}
+
+.poll-box:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 38px rgba(0,0,0,0.25);
+}
+.poll-box.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+.poll-box p{
+    font-size:16px;
+    font-weight:600;
+    color:#0d47a1;
+    margin-bottom:10px;
+}
+.poll-box .options button{
+    margin:6px 10px 0 0;
+    padding:8px 22px;
+font-size:14px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(135deg,#1976d2,#0d47a1);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 6px 14px rgba(25,118,210,0.35);
+    transition:all .3s ease;
+}
+
+.poll-box .options button:hover{
+    transform:scale(1.08);
+    box-shadow:0 10px 22px rgba(13,71,161,0.45);
+}
+/* ================= FOOTER ================= */
+footer{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    color:#e3f2fd;
+    text-align:center;
+    padding:14px 10px;
+    font-size:.9rem;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:600px){
+    h1{font-size:30px;}
+
+    .section{
+        padding:20px 18px;
+        width:94%;
+        border-radius:16px;
+    }
+}
+</style>
+</head>
+
+<body onload="document.body.classList.add('loaded'); showSection('form',document.querySelector('.submenu button'))">
+
+<header>
+    <h1><i class="fa-solid fa-clipboard-list"></i> Survey & Feedback</h1>
+    <a href="index.html" class="back-home">← Back to Home</a>
+</header>
+
+<main>
+
+<div class="submenu">
+    <button class="active" onclick="showSection('form',this)">Feedback Form</button>
+    <button onclick="showSection('poll',this)">Quick Poll</button>
+</div>
+
+<!-- FORM -->
+<div id="form" class="section">
+    <h2>Student Feedback Form</h2>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd6K2CYR0DZi7EC4hPyzvTX6xrP5867pRbfO6ixsJ9gkl-Z2w/viewform?embedded=true"
+            style="width:100%;height:1100px;border:none;"></iframe>
+</div>
+
+<!-- QUICK POLL (REPLACED) -->
+<div id="poll" class="section">
+    <h2><i class="fa-solid fa-chart-pie"></i> Quick Poll</h2>
+
+    <div class="poll-box" data-question="q1">
+        <p><strong>1. Do you prefer e-books over printed books?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q2">
+        <p><strong>2. Do printed books help you focus better?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q3">
+        <p><strong>3. Do digital devices distract you while reading?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q4">
+        <p><strong>4. Are e-books more convenient to carry?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q5">
+        <p><strong>5. Do you read more because of digital platforms?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q6">
+        <p><strong>6. Do printed books reduce eye strain?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q7">
+        <p><strong>7. Is digital reading cost-effective?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q8">
+        <p><strong>8. Do you use mobile phones for academic reading?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q9">
+        <p><strong>9. Should libraries maintain both formats?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+
+    <div class="poll-box" data-question="q10">
+        <p><strong>10. Will e-books replace printed books?</strong></p>
+        <div class="options">
+            <button onclick="vote(this)">Yes</button>
+            <button onclick="vote(this)">No</button>
+        </div>
+        <div class="results"></div>
+    </div>
+<button class="summary-btn" onclick="showSummary()">View Final Summary</button>
+<div id="inlineSummary" style="display:none; margin-top:35px; animation:slideUp .6s ease;">
+    <h3 style="color:#0d47a1;">
+        <i class="fa-solid fa-chart-column"></i> Poll Summary
+    </h3>
+
+    <p id="summaryText" style="font-weight:bold; margin-top:15px;"></p>
+
+    <p style="margin-top:25px; color:green; font-weight:bold; font-size:18px;">
+        ✅ Thank you for participating in the survey!
+    </p>
+</div>
+</div>
+</main>
+
+<footer>
+© 2026 Read Right | Student Awareness Project
+</footer>
+
+<script>
+const pollData = {};
+
+function showSection(id, btn){
+    document.querySelectorAll('.section').forEach(sec=>{
+        sec.style.display="none";
+        sec.classList.remove("pop");
+    });
+
+    const activeSection = document.getElementById(id);
+    activeSection.style.display="block";
+    activeSection.classList.add("pop");
+
+    document.querySelectorAll('.submenu button').forEach(b=>b.classList.remove("active"));
+    if(btn) btn.classList.add("active");
+
+    if(id === "poll"){
+        animatePollQuestions();
+    }
+}
+
+function vote(btn){
+    const pollBox = btn.closest('.poll-box');
+    const question = pollBox.dataset.question;
+    const option = btn.innerText;
+
+    if(!pollData[question]) pollData[question] = {};
+    pollData[question][option] = (pollData[question][option] || 0) + 1;
+
+    renderResults(pollBox, question);
+    updateSummary();
+}
+function renderResults(pollBox, question){
+    const resultsDiv = pollBox.querySelector('.results');
+    resultsDiv.innerHTML = "";
+
+    const data = pollData[question];
+    const yes = data["Yes"] || 0;
+    const no  = data["No"]  || 0;
+    const total = yes + no;
+
+    if(total === 0) return;
+
+    resultsDiv.innerHTML = `
+        <div style="margin-top:10px;font-weight:bold;">
+            ✅ Yes: ${yes} &nbsp;&nbsp; ❌ No: ${no}
+        </div>
+    `;
+}
+function updateSummary(){
+    let yesCount = 0;
+    let noCount = 0;
+
+    Object.values(pollData).forEach(q=>{
+        yesCount += q["Yes"] || 0;
+        noCount  += q["No"]  || 0;
+    });
+
+    if(yesCount + noCount === 0){
+        document.getElementById("summaryText").innerText =
+            "No responses recorded yet.";
+        return;
+    }
+
+    document.getElementById("summaryText").innerHTML = `
+        <strong>Total Yes:</strong> ${yesCount}<br>
+        <strong>Total No:</strong> ${noCount}<br><br>
+        ${
+            yesCount > noCount
+            ? "Overall, students show a stronger inclination towards digital reading practices."
+            : "Overall, students still show strong preference for printed reading practices."
+        }
+    `;
+}
+
+function showSummary(){
+    updateSummary();
+    document.getElementById("inlineSummary").style.display = "block";
+    document.getElementById("inlineSummary").scrollIntoView({behavior:"smooth"});
+}
+
+function animatePollQuestions(){
+    const boxes = document.querySelectorAll("#poll .poll-box");
+    boxes.forEach((box, index)=>{
+        box.classList.remove("show");
+        setTimeout(()=>{
+            box.classList.add("show");
+        }, index * 180);
+    });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Read Right – Student Awareness</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+body{
+    margin:0;
+    padding:0;
+    font-family:"Segoe UI",Arial,sans-serif;
+    background-image:
+    linear-gradient(rgba(227,242,253,0.8),rgba(95, 111, 128, 0.8)),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66");
+    background-size:cover;
+    background-attachment:fixed;
+    background-position:center center;
+    background-color:#e3f2fd;
+    scroll-behavior:smooth;
+    color:#333;
+    animation:backgroundRotate3D 12s ease-in-out infinite;
+}
+
+@keyframes backgroundRotate3D{
+    0%{ background-position:0% 0%; }
+    50%{ background-position:50% 50%; }
+    100%{ background-position:100% 100%; }
+}
+
+p{
+    line-height:1.8;
+    font-size:1.05em;
+    color:#555;
+}
+strong{
+    color:#0d47a1;
+    font-weight:600;
+}
+/* NAV */
+nav{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    padding:8px 12px;
+    box-shadow:0 4px 16px rgba(13,71,161,.25);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+.menu a{
+    color:white;
+    margin-left:8px;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+    transition:all .3s ease;
+    padding:5px 10px;
+    border-radius:7px;
+    display:inline-block;
+    font-size:0.9em;
+}
+.menu a:hover{
+    background:rgba(255,255,255,.2);
+    transform:translateY(-2px);
+}
+
+.submenu{
+    display:flex;
+    justify-content:center;
+    background:white;
+    padding:12px;
+    position:sticky;
+    top:0;
+    z-index:10;
+    transform-style:preserve-3d;
+    perspective:1200px;
+}
+.submenu a{
+    margin:0 10px;
+    padding:14px 26px;
+    text-decoration:none;
+    font-weight:bold;
+    color:#0d47a1;
+    cursor:pointer;
+    transition:all .3s cubic-bezier(.22,.61,.36,1);
+    border-bottom:3px solid transparent;
+    transform-style:preserve-3d;
+}
+.submenu a:hover{
+    color:#1976d2;
+    transform:translateY(-3px);
+    border-bottom-color:#42a5f5;
+}
+.submenu a.active{
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+    color:white;
+    border-radius:30px;
+    box-shadow:0 10px 25px rgba(13,71,161,.3);
+    border-bottom-color:transparent;
+}
+
+/* PAGE */
+.page{
+    display:none;
+    padding:45px;
+    max-width:1050px;
+    margin:60px auto;
+    border-radius:20px;
+    background:white;
+    box-shadow:0 35px 60px rgba(0,0,0,0.35);
+    overflow:auto;
+    max-height:80vh;
+    transform-style:preserve-3d;
+    perspective:1000px;
+}
+.page.pop{
+    animation:popFromTop .9s ease;
+}
+@keyframes popFromTop{
+    0%{transform:translateY(-60px) scale(.95) rotateX(45deg);opacity:0}
+    50%{transform:translateY(-30px) scale(.98) rotateX(22.5deg)}
+    100%{transform:translateY(0) scale(1) rotateX(0deg);opacity:1}
+}
+
+/* BACKGROUNDS */
+#home{
+    background:linear-gradient(135deg,rgba(13,71,161,.1),rgba(25,118,210,.1)),linear-gradient(rgba(255,255,255,0.90),rgba(227,242,253,0.90)),url("https://snworksceo.imgix.net/wfw/8d2f27b1-5bd6-4055-8c84-ae5c4da1cf46.sized-1000x1000.png?w=800");
+    background-size:cover;
+}
+#introduction{
+    background:linear-gradient(rgba(227,242,253,0.9),rgba(187,222,251,0.9)),url("https://images.unsplash.com/photo-1455541504462-57ebb2a9cec1");
+    background-size:cover;
+}
+#objectives{
+    background:linear-gradient(rgba(255,248,225,0.9),rgba(255,236,179,0.9)),url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+    background-size:cover;
+}
+#scope{
+    background:linear-gradient(rgba(232,245,233,0.9),rgba(200,230,201,0.9)),url("https://images.unsplash.com/photo-1523240795612-9a054b0db644");
+    background-size:cover;
+}
+#objectives ul,
+#scope ul {
+    list-style: none;
+    padding-left: 0;
+}
+#objectives ul li, #scope ul li {
+    margin-bottom: 15px;
+    padding-left: 30px;
+    position:relative;
+    transition:all .3s ease;
+    transform-style:preserve-3d;
+}
+#objectives ul li:hover, #scope ul li:hover {
+    padding-left: 35px;
+    color:#0d47a1;
+    transform:translateX(5px) rotateY(-5deg);
+}
+#objectives ul li i.fa-check-circle, #scope ul li i.fa-solid {
+    margin-right: 12px;
+    color: #1976d2;
+    font-size:1.1em;
+}
+    .screen{
+    padding:30px 35px;
+    overflow-y:auto;
+    color:#2b2b2b;
+    font-family:"Georgia","Times New Roman",serif;
+    line-height:1.7;
+}
+.screen strong{
+    display:block;
+    font-size:14px;
+    letter-spacing:1px;
+    color:#666;
+    margin-bottom:5px;
+    text-transform:uppercase;
+}
+    .screen h1{
+    margin:5px 0 10px;
+    font-size:32px;
+    color:#1e3c72;
+}
+
+.screen p{
+    font-size:18px;
+    margin-bottom:16px;
+}
+
+/* Smooth scrollbar */
+.screen::-webkit-scrollbar{
+    width:6px;
+}
+.screen::-webkit-scrollbar-thumb{
+    background:#c5c5c5;
+    border-radius:10px;
+}
+
+/* Animations */
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+@keyframes scaleUp{
+    from{transform:scale(0.85);}
+    to{transform:scale(1);}
+}
+/* Enhanced headings: animated multicolor gradients, subtle glow, and interactive hover effects */
+:root{
+    --heading-grad: linear-gradient(90deg,#ff6f61,#ffb703,#8e44ad,#42a5f5);
+    --accent-grad: linear-gradient(90deg,#ffb703,#ff6f00,#ff6f61);
+}
+
+h1{
+    font-family:'Playfair Display', 'Segoe UI', Arial, sans-serif;
+    font-weight:700;
+    font-size:44px;
+    margin-bottom:10px;
+    background:var(--heading-grad);
+    background-size:300% 300%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    text-shadow:0 2px 8px rgba(0,0,0,0.18), 0 0 16px rgba(142,68,173,0.06);
+    animation:gradientShift 6s linear infinite;
+    transition:transform .4s cubic-bezier(.22,.61,.36,1), text-shadow .3s ease;
+}
+@keyframes gradientShift{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+h1:hover{
+    transform:translateY(-6px) rotateX(4deg) scale(1.02);
+    text-shadow:0 8px 28px rgba(66,165,245,0.12), 0 0 32px rgba(255,183,3,0.10);
+}
+
+h1 i{
+    color:#ff6f61;
+    -webkit-text-fill-color: initial;
+    filter:drop-shadow(0 4px 12px rgba(141,68,173,0.12));
+}
+
+h2{
+    font-family:'Playfair Display', 'Segoe UI', Arial, sans-serif;
+    color:#ff6f00;
+    border-bottom:3px solid #ffb703;
+    padding-bottom:12px;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+h3{
+    font-family:'Playfair Display', 'Segoe UI', Arial, sans-serif;
+    color:#ff8a00;
+    transition:all .3s ease;
+    transform-style:preserve-3d;
+    perspective:1000px;
+}
+
+h3:hover{
+    color:#ff6f00;
+    transform:translateX(8px);
+}
+
+img{
+    width:100%;
+    max-width:480px;
+    display:block;
+    margin:25px auto;
+    border-radius:14px;
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+    perspective:1000px;
+    transform-style:preserve-3d;
+}
+img:hover{
+    transform:scale(1.08) rotateY(2deg) rotateX(-2deg) rotateZ(.4deg);
+    box-shadow:0 25px 50px rgba(25,118,210,.25);
+}
+
+/* OVERLAY */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:none;               
+    justify-content:center;
+    align-items:center;
+    background:rgba(10,20,40,0.65);   
+    backdrop-filter:blur(6px);      
+    z-index:9999;
+    animation:fadeIn 0.4s ease;
+}
+.overlay[style*="display: flex"] {
+    display:flex !important;
+}
+
+/* REALISTIC PRINTED BOOK */
+.printed-book{
+    position:relative;
+    width:320px;
+    height:420px;
+    transform-style:preserve-3d;
+    transition:1s cubic-bezier(.22,.61,.36,1);
+    cursor:pointer;
+}
+.printed-book:hover{
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,.4));
+    transform:rotateY(5deg) rotateX(-3deg) scale(1.02);
+}
+.printed-book .spine{
+    position:absolute;
+    left:-26px;
+    width:26px;
+    height:100%;
+    background:linear-gradient(#5a1c1c,#8d2c2c,#5a1c1c);
+    transform:rotateY(90deg);
+    transform-origin:right;
+}
+.printed-book .cover{
+    position:absolute;
+    inset:0;
+    background:#8d2c2c;
+    transform-origin:left;
+    transition:1s;
+    box-shadow:20px 0 40px rgba(0,0,0,.6);
+    z-index:2;
+}
+.printed-book .pages{
+    position:absolute;
+    inset:20px;
+    background:#fff8e1;
+    padding:18px;
+    font-size:14px;
+    overflow:auto;
+    box-shadow:inset 0 0 10px rgba(0,0,0,.3);
+    z-index:1;
+}
+.printed-book.open .cover{
+    transform:rotateY(-160deg);
+    transition:1.2s cubic-bezier(.22,.61,.36,1);
+}
+.printed-preview{
+    background:linear-gradient(135deg,#7b1e1e,#b33939);
+}
+
+.printed-preview:hover{
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,0.15),
+        0 10px 25px rgba(179,57,57,0.6),
+        0 0 18px rgba(179,57,57,0.9);
+}
+
+.printed-preview::after{
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+}
+/* ================= EBOOK ================= */
+    .ebook{
+    width:85%;
+    max-width:750px;
+    max-height:85vh;
+    background:#fdfcf8;               
+    border-radius:18px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.4);
+    overflow:hidden;
+    animation:scaleUp 0.4s ease;
+}
+.ebook-preview{
+    margin:16px auto;
+    padding:14px 18px;       
+    max-width:420px;         
+    border-radius:14px;
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
+    color:#fff;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s ease;
+    position:relative;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+}
+.ebook-preview i{
+    font-size:28px;           
+    margin-bottom:6px;
+}
+
+.ebook-preview h4{
+    margin:0;
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:.3px;
+}
+.ebook-preview:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,0.15),
+        0 10px 25px rgba(42,82,152,0.6),
+        0 0 18px rgba(42,82,152,0.9);
+}
+.ebook-preview::after{
+    content:"";
+    position:absolute;
+    inset:-4px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    opacity:0;
+    z-index:-1;
+    transition:.3s ease;
+}
+
+.ebook-preview:hover::after{
+    opacity:.7;
+    filter:blur(12px);
+}
+.status-bar{
+    height:26px;
+    padding:0 14px;
+    display:flex;
+    align-items:center;         
+    justify-content:space-between;
+    font-size:12px;
+    font-weight:600;
+}
+.status-bar .time{
+    font-weight:600;
+}
+
+.status-bar .icons i{
+    margin-left:6px;
+    font-size:13px;
+}
+.phone{
+    width:320px;
+    height:580px;
+    background:#000;
+    border-radius:38px;
+    padding:14px;
+    box-shadow:0 35px 80px rgba(0,0,0,.6);
+    position:relative;
+    animation:scaleUp .4s ease;
+    overflow:hidden;
+}
+
+.phone::before{
+    content:"";
+    position:absolute;
+    top:8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90px;
+    height:6px;
+    background:#333;
+    border-radius:10px;
+}
+.phone-screen{
+    width:100%;
+    height:100%;
+    background:#fdfcf8;
+    border-radius:26px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+.phone-screen::-webkit-scrollbar{
+    width:3px;
+}
+.phone-screen strong{
+    display:block;
+    font-size:13px;
+    color:#666;
+    text-transform:uppercase;
+    margin-bottom:5px;
+}
+
+.phone-screen h1{
+    font-size:22px;
+    color:#1e3c72;
+}
+
+.phone-screen p{
+    font-size:16px;
+    line-height:1.6;
+}
+.phone-content{
+    flex:1;
+    overflow-y:auto;
+    padding:16px 14px 28px;   
+    -webkit-overflow-scrolling:touch;
+}
+
+/* Scrollbar clean */
+.phone-content::-webkit-scrollbar{
+    width:3px;
+}
+.phone-content::-webkit-scrollbar-thumb{
+    background:#bbb;
+    border-radius:10px;
+}
+.battery{
+    display:flex;
+    align-items:center;  
+    gap:4px;
+    margin:0;           
+}
+.battery-box{
+    width:23px;
+    height:11px;
+    border:1.6px solid #000;
+    border-radius:3px;
+    position:relative;
+}
+
+.battery-box::after{
+    content:"";
+    position:absolute;
+    right:-3px;
+    top:3px;
+    width:2px;
+    height:5px;
+    background:#000;
+    border-radius:1px;
+}
+
+.battery-level{
+    height:100%;
+    width:78%;
+    background:#000;
+    border-radius:2px;
+    transition:width 1s linear;
+}
+
+.battery small{
+    font-size:11px;
+    font-weight:600;
+}
+.signal{
+    display:flex;
+    align-items:flex-end;  
+    gap:2px;
+    height:14px;
+}
+.signal span{
+    width:3px;
+    background:#000;
+    border-radius:1px;
+}
+.signal span:nth-child(1){ height:4px;  opacity:.4; }
+.signal span:nth-child(2){ height:7px;  opacity:.6; }
+.signal span:nth-child(3){ height:10px; opacity:.8; }
+.signal span:nth-child(4){ height:14px; opacity:1; }
+
+.icons{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.signal,
+.battery{
+    display:flex;
+    align-items:center;
+}
+/* Mobile */
+@media(max-width:600px){
+    .phone{
+        width:250px;
+        height:460px;
+    }
+}
+/* ================= MOBILE ================= */
+@media(max-width:600px){
+    html,body{
+        overflow-x:hidden;
+        width:100%;
+    }
+    nav{
+        padding:10px 8px;
+    }
+    .menu{
+        display:flex;
+        flex-wrap:wrap;
+        gap:5px;
+    }
+    .menu a{
+        margin-left:0;
+        padding:6px 8px;
+        font-size:0.85em;
+    }
+    .submenu{
+        flex-wrap:wrap;
+        padding:6px 4px;
+        gap:5px;
+    }
+    .submenu a{
+        margin:0;
+        padding:8px 10px;
+        font-size:0.8em;
+    }
+    .page{
+        display:none;
+        padding:12px;
+        max-width:100vw;
+        margin:10px 0;
+        border-radius:12px;
+        max-height:100%;
+        overflow-y:auto;
+        box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    }
+    .printed-book,.ebook{
+        width:250px;
+        height:330px;
+        transform:scale(.5);
+    }
+    p{
+        font-size:0.9em;
+        line-height:1.6;
+    }
+    h1{
+        font-size:1.3em;
+    }
+    h2{
+        font-size:1.1em;
+    }
+    h3{
+        font-size:1em;
+    }
+    img{
+        max-width:100% !important;
+        height:auto;
+        margin:15px 0;
+    }
+}
+
+/* Icon styling */
+i{
+    transition:all .3s ease;
+    transform-style:preserve-3d;
+}
+
+.menu a:hover i{
+    transform:scale(1.15) rotateZ(10deg) rotateX(20deg);
+}
+
+h1 i, h2 i, h3 i{
+    margin-right:8px;
+    opacity:.9;
+    transition:all .4s cubic-bezier(.22,.61,.36,1);
+}
+
+h3:hover i{
+    color:#0d47a1;
+    transform:scale(1.2) rotateY(360deg);
+    animation:iconSpin .6s ease;
+}
+@keyframes iconSpin{
+    0%{transform:scale(1) rotateY(0deg)}
+    50%{transform:scale(1.3) rotateY(180deg)}
+    100%{transform:scale(1.2) rotateY(360deg)}
+}
+    body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at top left, rgba(66,165,245,.15), transparent 40%),
+      radial-gradient(circle at bottom right, rgba(255,193,7,.12), transparent 40%);
+    z-index:-1;
+    transform-style:preserve-3d;
+    perspective:1500px;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(13,71,161,.08), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(25,118,210,.08), transparent 50%);
+    z-index:-1;
+    pointer-events:none;
+    transform-style:preserve-3d;
+    perspective:1200px;
+}
+/* 3D Shimmer overlay effect */
+html::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent);
+    pointer-events:none;
+    z-index:-1;
+    transform-style:preserve-3d;
+}
+/* 3D wave effect for depth */
+html::after{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(66,165,245,.01) 2px, rgba(66,165,245,.01) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(25,118,210,.01) 2px, rgba(25,118,210,.01) 4px);
+    pointer-events:none;
+    z-index:-1;
+    transform-style:preserve-3d;
+}
+
+.page{
+    transition:transform .6s cubic-bezier(.22,.61,.36,1), box-shadow .6s ease;
+    transform-style:preserve-3d;
+}
+.page:hover{
+    transform:translateY(-8px);
+    box-shadow:0 50px 90px rgba(0,0,0,.25);
+}
+img{
+    transition:transform .6s cubic-bezier(.22,.61,.36,1), box-shadow .6s ease;
+    perspective:1000px;
+    transform-style:preserve-3d;
+}
+.printed-book,
+.ebook{
+    transition:transform 1s cubic-bezier(.22,.61,.36,1), filter .6s ease;
+}
+
+#introduction div::-webkit-scrollbar{
+    width:6px;
+}
+#introduction div::-webkit-scrollbar-thumb{
+    background:linear-gradient(#1976d2,#42a5f5);
+    border-radius:10px;
+}
+.site-footer{
+    background:linear-gradient(135deg,#bdcbe1,#1565c0);
+    color:#fff9f9;
+    margin-top:60px;
+    box-shadow:0 -15px 40px rgba(0,0,0,.4);
+}
+
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:30px;
+    max-width:1200px;
+    margin:auto;
+    padding:50px 40px;
+}
+
+.footer-left h3{
+    margin:0 0 10px;
+    font-size:1.6em;
+}
+
+.footer-left p{
+    max-width:320px;
+    color:#ffffff;
+    line-height:1.7;
+}
+
+.footer-center h4,
+.footer-right h4{
+    margin-bottom:12px;
+    font-size:1.1em;
+}
+
+.footer-center a{
+    display:block;
+    color:#e3f2fd;
+    text-decoration:none;
+    margin-bottom:8px;
+    transition:.3s;
+}
+
+.footer-center a:hover{
+    color:#ffeb3b;
+    transform:translateX(5px);
+}
+
+.social-icons i{
+    margin-right:14px;
+    color: #ffffff;
+    font-size:1.2em;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.social-icons i:hover{
+    color:#ffeb3b;
+    transform:translateY(-5px) scale(1.15);
+}
+
+.footer-bottom{
+    text-align:center;
+    padding:15px;
+    background:rgba(0,0,0,.25);
+    font-size:.9em;
+    letter-spacing:.5px;
+}
+
+/* Mobile footer */
+@media(max-width:600px){
+    .footer-content{
+        flex-direction:column;
+        text-align:center;
+    }
+    .footer-left p{
+        margin:auto;
+    }
+}
+</style>
+</head>
+
+<body onload="openPage('home')">
+
+<nav>
+    <div class="menu">
+        <a onclick="openPage('home')">
+            <i class="fa-solid fa-house"></i> Home
+        </a>
+
+        <a href="researchFindings.html">
+            <i class="fa-solid fa-microscope"></i> Research Findings
+        </a>
+
+        <a href="awarness.html">
+            <i class="fa-solid fa-lightbulb"></i> Awareness Tips
+        </a>
+
+        <a href="survey.html">
+            <i class="fa-solid fa-clipboard-list"></i> Survey/Feedback
+        </a>
+
+        <a href="media.html">
+            <i class="fa-solid fa-image"></i> Media Gallery
+        </a>
+
+        <a href="chatbot.html">
+            <i class="fa-solid fa-robot"></i> Chatbot
+        </a>
+
+        <a href="communityforum.html">
+            <i class="fa-solid fa-comments"></i> Community Forum
+        </a>
+
+        <a href="resources.html">
+            <i class="fa-solid fa-book-open"></i> Resources
+        </a>
+
+        <a href="contact.html">
+            <i class="fa-solid fa-envelope"></i> Contact
+        </a>
+    </div>
+</nav>
+
+<div class="submenu">
+<a class="active" onclick="openPage('introduction',this)">
+<i class="fa-solid fa-book"></i> Introduction
+</a>
+<a onclick="openPage('objectives',this)">
+<i class="fa-solid fa-bullseye"></i> Objectives
+</a>
+<a onclick="openPage('scope',this)">
+<i class="fa-solid fa-earth-asia"></i> Scope
+</a>
+</div>
+
+<!-- PAGES -->
+<section id="home" class="page">
+<h1><i class="fa-solid fa-book-open-reader"></i> Read Right:</h1>
+<h2><strong>Student Awareness on Digital and Print Reading Practices</strong></h2>
+<p>This project promotes awareness about balanced reading habits using both digital and printed materials for effective learning.</p>
+<img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f">
+</section>
+
+<section id="introduction" class="page">
+<h2><i class="fa-solid fa-lightbulb"></i> Introduction</h2>
+<div style="max-height:60vh;overflow-y:auto;scroll-behavior:smooth;padding-right:8px;">
+<p>Reading is a fundamental learning activity. In today’s world, students use both <strong>e-books</strong> and <strong>printed books</strong>, each offering unique benefits.</p>
+
+<h3 onclick="openEBook()" style="cursor:pointer"><i class="fa-solid fa-tablet-screen-button"></i> E-Books (Digital Reading)</h3>
+<p>E-books provide instant access, portability, search features, and interactive content. They are ideal for quick reference, online learning, and remote education.</p>
+<div class="ebook-preview" onclick="openEBook()">
+    <i class="fa-solid fa-book-open"></i>
+    <h4>Tap to Open E-Book</h4>
+    
+</div>
+<h3 onclick="openPrintedBook()" style="cursor:pointer"><i class="fa-solid fa-book"></i> Printed Books (Traditional Reading)</h3>
+<p>Printed books improve focus, reduce screen fatigue, and support deep reading and long-term comprehension.</p>
+<div class="ebook-preview printed-preview" onclick="openPrintedBook()">
+    <i class="fa-solid fa-book"></i>
+    <h4>Tap to Open Printed Book</h4>
+</div>
+</section>
+
+<section id="objectives" class="page">
+<h2><i class="fa-solid fa-bullseye"></i> Objectives</h2>
+<ul>
+<li><i class="fa-solid fa-check-circle"></i>Promote awareness of e-books and printed books</li>
+<li><i class="fa-solid fa-check-circle"></i>Encourage healthy screen usage</li>
+<li><i class="fa-solid fa-check-circle"></i>Improve reading comprehension</li>
+<li><i class="fa-solid fa-check-circle"></i>Support balanced learning habits</li>
+</ul>
+<img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b" alt="Centered Image">
+</section>
+<section id="scope" class="page">
+<h2><i class="fa-solid fa-earth-asia"></i> Scope of Awareness</h2>
+
+<h3><i class="fa-solid fa-users"></i> Target Audience</h3>
+<ul>
+<li><i class="fa-solid fa-user-graduate"></i> Students</li>
+<li><i class="fa-solid fa-chalkboard-teacher"></i> Teachers</li>
+<li><i class="fa-solid fa-handshake"></i> Community</li>
+</ul>
+
+<h3><i class="fa-solid fa-location-dot"></i> Coverage Area</h3>
+<p>
+Schools, colleges, libraries, community centers, and online platforms.
+</p>
+<img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644">
+</section>
+<!-- PRINTED BOOK -->
+<div class="overlay" id="printedOverlay" onclick="closeOverlay()">
+<div class="printed-book" id="printedBook" onclick="event.stopPropagation()">
+<div class="spine"></div>
+<div class="cover"></div>
+<div class="pages">
+<strong>Printed Books</strong>
+<div style="text-align: center; font-style: italic;">
+    <h2>The Eagle</h2>   
+    <p>
+        He clasps the crag with crooked hands;<br>
+        Close to the sun in lonely lands,<br>
+        Ring'd with the azure world, he stands.
+    </p>
+    <p>
+        The wrinkled sea beneath him crawls;<br>
+        He watches from his mountain walls,<br>
+        And like a thunderbolt he falls.
+    </p>
+</div>
+</div>
+</div>
+</div>
+<!-- EBOOK -->
+<div class="overlay" id="ebookOverlay" onclick="closeOverlay()">
+    <div class="phone" onclick="event.stopPropagation()">
+
+        <div class="phone-screen">
+
+            <!-- STATUS BAR -->
+            <div class="status-bar">
+                <span class="time" id="phoneTime">9:41</span>
+                <span class="icons">
+                    <i class="fa-solid fa-wifi"></i>
+                    <span class="signal">
+    <span></span><span></span><span></span><span></span>
+</span>
+                    <span class="battery">
+    <span class="battery-box">
+        <span class="battery-level" id="batteryLevel"></span>
+    </span>
+    <small id="batteryPercent">78%</small>
+</span>
+                </span>
+            </div>
+
+            <!-- SCROLL CONTENT -->
+            <div class="phone-content">
+                <strong>E-Books</strong>
+                <h1>The Swing</h1>
+                <p><em>By Robert Louis Stevenson</em></p>
+
+                <p>
+                    How do you like to go up in a swing,<br>
+                    Up in the air so blue?<br>
+                    Oh, I do think it the pleasantest thing<br>
+                    Ever a child can do!
+                </p>
+
+                <p>
+                    Up in the air and over the wall,<br>
+                    Till I can see so wide,<br>
+                    River and trees and cattle and all<br>
+                    Over the countryside—
+                </p>
+
+                <p>
+                    Till I look down on the garden green,<br>
+                    Down on the roof so brown—<br>
+                    Up in the air I go flying again,<br>
+                    Up in the air and down!
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-left">
+            <h3><i class="fa-solid fa-book-open-reader"></i> Read Right</h3>
+            <p>
+                Promoting balanced digital and print reading habits for smarter learning.
+            </p>
+        </div>
+
+        <div class="footer-center">
+    <h4>Quick Links</h4>
+    <a href="index.html">Home</a>
+    <a href="researchFindings.html">Research</a>
+    <a href="awarness.html">Awareness</a>
+    <a href="resources.html">Resources</a>
+</div>
+
+        <div class="footer-right">
+    <h4>Connect</h4>
+    <div class="social-icons">
+        <a href="https://web.telegram.org/a/" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://x.com/RiddhiPati15" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://linkedin.com/in/riddhipatil" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+</div>
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Read Right | Student Awareness Project
+    </div>
+</footer>
+
+<script>
+function openPage(id,el){
+    document.querySelectorAll('.page').forEach(p=>{
+        p.style.display='none';
+        p.classList.remove('pop');
+    });
+    const page=document.getElementById(id);
+    page.style.display='block';
+    page.classList.add('pop');
+
+    document.querySelectorAll('.submenu a').forEach(a=>a.classList.remove('active'));
+    if(el) el.classList.add('active');
+
+    if(id!=='home'){
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+}
+
+function openPrintedBook(){
+    const printedOverlay = document.getElementById('printedOverlay');
+    const printedBook = document.getElementById('printedBook');
+    if(printedOverlay && printedBook) {
+        document.body.style.overflow='hidden';
+        printedOverlay.style.display='flex';
+        printedOverlay.style.visibility='visible';
+        printedOverlay.style.opacity='1';
+        setTimeout(()=>{
+            printedBook.classList.add('open');
+        }, 50);
+    }
+}
+function openEBook(){
+    const ebookOverlay = document.getElementById('ebookOverlay');
+    if(ebookOverlay){
+        document.body.style.overflow = 'hidden';
+        ebookOverlay.style.display = 'flex';
+        ebookOverlay.style.visibility = 'visible';
+        ebookOverlay.style.opacity = '1';
+    }
+}
+function updatePhoneTime(){
+    const timeEl = document.getElementById("phoneTime");
+    if(!timeEl) return;
+
+    const now = new Date();
+    let h = now.getHours();
+    let m = now.getMinutes();
+
+    m = m < 10 ? "0" + m : m;
+
+    timeEl.textContent = `${h}:${m}`;
+}
+
+updatePhoneTime();
+setInterval(updatePhoneTime, 60000);
+function closeOverlay(){
+    const printedBook = document.getElementById('printedBook');
+    const printedOverlay = document.getElementById('printedOverlay');
+    const ebookOverlay = document.getElementById('ebookOverlay');
+    
+    document.body.style.overflow = 'auto';
+
+    if(printedBook) printedBook.classList.remove('open');
+
+    if(printedOverlay){
+        printedOverlay.style.display='none';
+        printedOverlay.style.visibility='hidden';
+    }
+
+    if(ebookOverlay){
+        ebookOverlay.style.display='none';
+        ebookOverlay.style.visibility='hidden';
+    }
+}
+let batteryLevel = 78;
+function updateBattery(){
+    const percent = document.getElementById("batteryPercent");
+    const level = document.getElementById("batteryLevel");
+
+    if(!percent || !level) return;
+
+    percent.textContent = batteryLevel + "%";
+    level.style.width = batteryLevel + "%";
+
+    batteryLevel--;
+    if(batteryLevel < 10) batteryLevel = 78;
+}
+updateBattery();
+setInterval(updateBattery, 60000);
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const path = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.menu a').forEach(a=>{
+    const href = a.getAttribute('href');
+    if(href && href === path) a.classList.add('active');
+    if(!href && (path === 'index.html' || path === '')) a.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>

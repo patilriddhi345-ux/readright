@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Awareness Tips – Read Right</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+html, body{height:100%}
+
+body{
+    margin:0;
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:
+      linear-gradient(rgba(227,242,253,0.8),rgba(95,111,128,0.8)),
+      url("https://images.unsplash.com/photo-1507842217343-583bb7270b66");
+    background-size:cover;
+    background-attachment:fixed;
+    animation:bgMove 18s ease-in-out infinite;
+    display:flex;
+    flex-direction:column;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 0%}
+    50%{background-position:50% 50%}
+    100%{background-position:100% 100%}
+}
+
+header{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    color:white;
+    text-align:center;
+    padding:22px 15px 30px;
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+h1{
+    font-family:'Cinzel', serif;
+    font-size:38px;
+    background:linear-gradient(90deg,#b6a3bb,#37d39f,#1976d2);
+    background-size:300% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:headingShift 6s linear infinite;
+}
+
+@keyframes headingShift{
+    0%{background-position:0%}
+    100%{background-position:300%}
+}
+
+.back-home{
+    display:inline-block;
+    margin-top:6px;
+    color:#ffeb3b;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+main{flex:1 0 auto}
+
+.submenu{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin:30px auto;
+    flex-wrap:wrap;
+    max-width:900px;
+    width:90%;
+}
+
+.submenu button{
+    border:none;
+    padding:14px 28px;
+    border-radius:30px;
+    background:white;
+    color:#0d47a1;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.submenu button.active{
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+    color:white;
+}
+
+.section{
+    display:none;
+    background:rgba(255,255,255,.88);
+    padding:40px;
+    border-radius:22px;
+    max-width:900px;
+    width:90%;
+    margin:0 auto 40px;
+    box-shadow:0 35px 60px rgba(0,0,0,.35);
+}
+
+.section.pop{animation:pop .6s ease}
+
+@keyframes pop{
+    from{opacity:0;transform:translateY(-20px)}
+    to{opacity:1;transform:none}
+}
+
+.tip{
+    background:#eef5ff;
+    padding:16px;
+    border-left:5px solid #1976d2;
+    border-radius:10px;
+    margin:15px 0;
+}
+
+/* SLIDER */
+.slider{
+    position:relative;
+    overflow:hidden;
+    border-radius:15px;
+}
+
+.slides{
+    display:flex;
+    transition:transform .6s ease;
+}
+
+.slides img{
+    width:100%;
+    height:700px;
+    object-fit:contain;
+    background:#eef5ff;
+    flex-shrink:0;
+}
+
+.slide-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(13,71,161,.8);
+    color:white;
+    border:none;
+    font-size:20px;
+    padding:10px 14px;
+    cursor:pointer;
+    border-radius:50%;
+    display:none !important;
+}
+
+.prev{left:10px}
+.next{right:10px}
+
+.dots{text-align:center;margin-top:10px}
+
+.dot{
+    width:14px;
+    height:14px;
+    background:#b0bec5;
+    border-radius:50%;
+    display:inline-block;
+    margin:0 6px;
+    cursor:pointer;
+}
+
+.dot.active{background:#1976d2}
+#safety .tip{
+    opacity:0;
+    transform:translateY(20px);
+}
+
+#safety .tip.show{
+    animation:tipPop .6s ease forwards;
+}
+
+@keyframes tipPop{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+.video-wrapper{
+    position:relative;
+    width:100%;
+    padding-bottom:56.25%; /* 16:9 ratio */
+    height:0;
+    overflow:hidden;
+    border-radius:15px;
+    margin-bottom:25px;
+}
+
+.video-wrapper iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:0;
+}
+.guide-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.guide-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+footer{
+    background:linear-gradient(90deg,#0d47a1,#1976d2);
+    color:#e3f2fd;
+    text-align:center;
+    padding:14px;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media(max-width:768px){
+
+h1{font-size:28px}
+
+.submenu{
+    flex-direction:column;
+    gap:12px;
+}
+
+.submenu button{
+    width:100%;
+}
+
+.section{
+    padding:25px 20px;
+}
+
+.slides img{
+    height:220px;
+}
+
+.slide-btn{
+    font-size:18px;
+    padding:8px 12px;
+    display:block;
+}
+
+}
+
+@media(max-width:480px){
+
+h1{font-size:24px}
+
+.slides img{
+    height:200px;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1><i class="fa-solid fa-bullhorn"></i> Awareness Tips</h1>
+    <a href="index.html" class="back-home">← Back to Home</a>
+</header>
+
+<main>
+
+<div class="submenu">
+    <button class="active" onclick="showSection('dos',this)">Do’s & Don’ts</button>
+    <button onclick="showSection('guides',this)">Step-by-Step Guides</button>
+    <button onclick="showSection('safety',this)">Safety Practices</button>
+    <button onclick="showSection('stories',this)">Real-Life Stories</button>
+</div>
+
+<div id="dos" class="section">
+<h2>✔ Do’s & Don’ts</h2>
+
+<div class="slider">
+    <div class="slides" id="dosSlides">
+            <img src="D1.png" alt="Good reading habits">
+            <img src="D2.png" alt="Proper posture reading">
+            <img src="D3.png" alt="Avoid screen misuse">
+      </div>
+</div>
+
+<div class="dots">
+    <span class="dot active" onclick="currentSlide(0)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+</div>
+</div>
+
+<div id="guides" class="section">
+    <h2>📘 Step-by-Step Guides</h2>
+
+    <div class="guide-image">
+        <img 
+            src="S1.png" 
+            alt="Read Right – Step by Step Awareness Guide"
+        >
+    </div>
+</div>
+<div id="safety" class="section">
+    <h2>🛡 Safety Practices</h2>
+
+    <div class="tip">
+        <strong>✔ Choose the Right Reading Format</strong><br>
+        Use printed books for long study sessions and eBooks for short, quick reading to reduce eye strain.
+    </div>
+
+    <div class="tip">
+        <strong>✔ Maintain Proper Lighting</strong><br>
+        Always read in a well-lit environment. Avoid reading in dark or dim places, especially on screens.
+    </div>
+
+    <div class="tip">
+        <strong>✔ Follow the 20-20-20 Rule</strong><br>
+        Every 20 minutes, look at something 20 feet away for 20 seconds to protect your eyes.
+    </div>
+
+    <div class="tip">
+        <strong>✔ Maintain Correct Posture</strong><br>
+        Sit straight with proper back support. Keep books and screens at eye level.
+    </div>
+
+    <div class="tip">
+        <strong>✔ Limit Screen Time</strong><br>
+        Avoid excessive use of eBooks. Balance digital reading with printed books for healthy habits.
+    </div>
+
+    <div class="tip">
+        <strong>✔ Take Regular Breaks</strong><br>
+        Short breaks help reduce fatigue, improve concentration, and prevent health risks.
+    </div>
+
+</div>
+<div id="stories" class="section">
+    <h2>👥 Real-Life Stories</h2>
+
+    <!-- YOUTUBE VIDEO -->
+    <div class="video-wrapper">
+    <iframe 
+        src="https://www.youtube.com/embed/55ExTAfPxGc" 
+        title="Books vs Screen Discussion"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
+   <!-- CASE STUDY TEXT -->
+<div class="tip">
+    <strong>Case Study: “Books vs Screen” Group Discussion</strong>
+
+<p>The group discussion on “Books vs Screen” compared printed books and digital screens in learning and reading habits. Participants agreed that books improve focus and deep understanding, while screens offer convenience and quick access but may cause distractions. 
+    The discussion concluded that both are useful depending on the purpose—books for concentration and screens for speed and accessibility.</p>
+    </div>
+    </div>
+</main>
+
+<footer>© 2026 Read Right | Student Awareness Project</footer>
+<script>
+let slideIndex=0;
+const slides=document.getElementById("dosSlides");
+const dots=document.querySelectorAll(".dot");
+
+function showSection(id,btn){
+    document.querySelectorAll('.section').forEach(s=>{
+        s.style.display='none';
+        s.classList.remove('pop');
+    });
+
+    const activeSection = document.getElementById(id);
+    activeSection.style.display='block';
+    activeSection.classList.add('pop');
+
+    document.querySelectorAll('.submenu button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+
+    /* SAFETY PRACTICES POP ONE BY ONE */
+    if(id === 'safety'){
+        const tips = activeSection.querySelectorAll('.tip');
+        tips.forEach(tip => tip.classList.remove('show'));
+
+        tips.forEach((tip,index)=>{
+            setTimeout(()=>{
+                tip.classList.add('show');
+            }, index * 300); 
+        });
+    }
+}
+
+function moveSlide(step){
+    slideIndex+=step;
+    if(slideIndex<0) slideIndex=slides.children.length-1;
+    if(slideIndex>=slides.children.length) slideIndex=0;
+    slides.style.transform=`translateX(-${slideIndex*100}%)`;
+    updateDots();
+}
+
+function currentSlide(n){
+    slideIndex = n;
+    slides.style.transform = `translateX(-${slideIndex*100}%)`;
+    updateDots();
+}
+
+function updateDots(){
+    dots.forEach(d=>d.classList.remove('active'));
+    dots[slideIndex].classList.add('active');
+}
+
+setInterval(()=>moveSlide(1),3000);
+showSection('dos',document.querySelector('.submenu button'));
+</script>
+</body>
+</html>
